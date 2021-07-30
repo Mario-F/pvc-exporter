@@ -11,10 +11,10 @@ This exporter provides 2 metrics, one for monitoring mounted pvc usage precent n
 Only used to monitor mounted pvc that provied by block storage provisioner.
 The following storage provisioners has been confirmed to be working:
 
-* longgorn  
-* trident  
-* rook-ceph  
-* aliyun flexvolume  
+* longgorn
+* trident
+* rook-ceph
+* aliyun flexvolume
 * iomesh
 * nutanix-csi
 
