@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Mario-F/pvc-exporter/compare/v1.1.0...v1.1.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* check for spec.volumes to exists before iterate ([0892828](https://github.com/Mario-F/pvc-exporter/commit/0892828aabb4b29a0a9285828f459161e3dc1a38))
+
 # [1.1.0](https://github.com/Mario-F/pvc-exporter/compare/v1.0.0...v1.1.0) (2021-07-22)
 
 
