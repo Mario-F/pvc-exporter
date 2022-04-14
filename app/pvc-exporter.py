@@ -67,21 +67,22 @@ def main():
         pvcs=get_items(k8s_api_obj.list_namespaced_persistent_volume_claim(ns))
         _debug("Process %s pods in namespace %s" % (len(pods), i))
         for p in pods:
-          for vc in p['spec']['volumes']:
-            if vc['persistent_volume_claim']:
-              pvc=vc['persistent_volume_claim']['claim_name']
-              for v in pvcs:
-                if v['metadata']['name'] == pvc:
-                  vol=v['spec']['volume_name']
-              pod=p['metadata']['name']
-              _debug("PVC: %s, VOLUME: %s, POD: %s" % (pvc,vol,pod))
-              if pvc in pool.keys():
-                g.remove(pvc,pool[pvc][0],pool[pvc][1])
-                g.labels(pvc,vol,pod)
-                pool[pvc]=[vol,pod]
-              else:
-                g.labels(pvc,vol,pod)
-                pool[pvc]=[vol,pod]
+          if p['spec']['volumes']:
+            for vc in p['spec']['volumes']:
+              if vc['persistent_volume_claim']:
+                pvc=vc['persistent_volume_claim']['claim_name']
+                for v in pvcs:
+                  if v['metadata']['name'] == pvc:
+                    vol=v['spec']['volume_name']
+                pod=p['metadata']['name']
+                _debug("PVC: %s, VOLUME: %s, POD: %s" % (pvc,vol,pod))
+                if pvc in pool.keys():
+                  g.remove(pvc,pool[pvc][0],pool[pvc][1])
+                  g.labels(pvc,vol,pod)
+                  pool[pvc]=[vol,pod]
+                else:
+                  g.labels(pvc,vol,pod)
+                  pool[pvc]=[vol,pod]
       sleep(args.interval)
 
 #
